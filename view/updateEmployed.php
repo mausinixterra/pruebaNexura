@@ -11,26 +11,25 @@
     
     <div class="container-md">
         <h2>Actualizar empleado</h2>
-        
-        <form id="formulario">
 
-            <div class="mb-3 row">
+        <form id="actualizar">
+                <div class="mb-3 row">
                 <label for="inputName" class="col-sm-2 col-form-label">Nombre completo *</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control form-control-sm" name="inputName" value="<?= $data["nombre"] ?>" placeholder="Nombre completo del empleado">
+                    <input type="text" class="form-control form-control-sm" name="inputName" value="<?= $data[1] ?>" placeholder="Nombre completo del empleado">
                 </div>
             </div>
 
             <div class="mb-3 row">
                 <label for="inputEmail" class="col-sm-2 col-form-label">Correo electrónico *</label>
                 <div class="col-sm-10">
-                    <input type="email" class="form-control form-control-sm" name="email" value="<?= $data["email"] ?>" placeholder="Correo electrónico">
+                    <input type="email" class="form-control form-control-sm" name="email" value="<?= $data[2] ?>" placeholder="Correo electrónico">
                 </div>
             </div>
 
-            <?php   if( $data["sexo"] == "M" ){
+            <?php   if( $data[3] == "M" ){
                         $checkedM = "checked";
-                    } else if ( $data["sexo"] == "F" ) {
+                    } else if ( $data[3] == "F" ) {
                         $checkedF = "checked";
                     } 
             ?>
@@ -56,9 +55,10 @@
                 <label for="inputEmail" class="col-sm-2 col-form-label">Área *</label>
                 <div class="col-sm-10">
                     <select class="form-select form-select-sm" name="area_id" aria-label=".form-select-sm example">
-                        <option selected>Open this select menu</option>
-                        <option value="1">One</option>
-                        
+                        <option selected>Selecione el área</option>
+                        <?php foreach ($areas as $key => $value) { ?>
+                            <option value="<?= $value[0] ?>" <?php $value[0] == $data["area_id"] ? "selected" : "" ?> ><?= $value["nombre"] ?></option>
+                        <?php } ?>
                     </select>
                 </div>
             </div>
@@ -74,9 +74,9 @@
                 <label for="inputEmail" class="col-sm-2 col-form-label"></label>
                 <div class="col-sm-10">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="1" name="boletin">
+                        <input class="form-check-input" type="checkbox" value="<?= $value[5] ?>" name="boletin">
                         <label class="form-check-label" for="flexCheckDefault">
-                            Default checkbox
+                            Deseo recibir el boletin informativo
                         </label>
                     </div>
                 </div>
@@ -85,34 +85,18 @@
             <div class="mb-3 row">
                 <label for="inputEmail" class="col-sm-2 col-form-label">Roles *</label>
                 <div class="col-sm-10">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="1" name="rol">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Default checkbox
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="2" name="rol">
-                        <label class="form-check-label" for="flexCheckChecked">
-                            Checked checkbox
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="3" name="rol">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Default checkbox
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="4" name="rol">
-                        <label class="form-check-label" for="flexCheckChecked">
-                            Checked checkbox
-                        </label>
-                    </div>
+                    <?php foreach ($roles as $key => $value) { ?>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="<?= $value[0] ?>" <?php $value[0] == $dataUserRol["rol_id"] ? "checked" : "" ?>  name="rol">
+                            <label class="form-check-label" for="flexCheckDefault">
+                            <?= $value["nombre"] ?>
+                            </label>
+                        </div>
+                    <?php } ?>
                 </div>
             </div>
             
-            <button class="btn btn-primary" type="submit">Guardar</button>
+            <button class="btn btn-primary" type="submit">Actualizar</button>
         </form>
         <div class="mt-3" id="respuesta"></div>
         

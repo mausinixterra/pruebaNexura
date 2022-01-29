@@ -38,5 +38,29 @@
             $respuesta = parent::delete($queryEployed);
             return $respuesta;
         }
+
+        public function updateEmploye( $var ){
+            $queryEployed = "DELETE empleado, empleado_rol FROM empleado INNER JOIN empleado_rol ON empleado.id = empleado_rol.empleado_id WHERE empleado.id = $var ";
+            $respuesta = parent::delete($queryEployed);
+            return $respuesta;
+        }
+
+        public function find($id){
+            $queryEployed = "SELECT empleado.id, empleado.nombre, email, sexo, areas.nombre AS area, boletin FROM empleado, areas WHERE areas.id = empleado.area_id AND empleado.id = $id";
+            $listEmployed = mysqli_fetch_row(parent::select( $queryEployed ));
+            var_dump( $listEmployed );
+            return $listEmployed;
+        }
+        public function findRolesUser($id){
+            $queryEployed = "SELECT
+                            empleado_rol.rol_id
+                            FROM empleado INNER JOIN areas ON areas.id = empleado.area_id
+                            INNER JOIN empleado_rol ON empleado.id = empleado_rol.empleado_id
+                            INNER JOIN roles ON roles.id = empleado_rol.rol_id
+                            WHERE empleado.id = $id";
+            $listEmployed = parent::select( $queryEployed );
+            
+            return $listEmployed;
+        }
     }
 ?>

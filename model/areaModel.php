@@ -1,5 +1,4 @@
 <?php
-    include 'main.php';
 
     class areaModel extends Main {
         private $id;
@@ -7,8 +6,7 @@
 
         public function listAreas(){
             $queryAreas = "SELECT * FROM areas";
-            $listEAreas = parent::select( $queryAreas );
-            
+            $listEAreas = parent::select( $queryAreas ); 
             return $listEAreas;
         }
     }
