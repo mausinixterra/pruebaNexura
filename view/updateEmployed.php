@@ -10,35 +10,41 @@
 <body>
     
     <div class="container-md">
-        <h2>Crear empleado</h2>
+        <h2>Actualizar empleado</h2>
         
         <form id="formulario">
 
             <div class="mb-3 row">
                 <label for="inputName" class="col-sm-2 col-form-label">Nombre completo *</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control form-control-sm" name="inputName" placeholder="Nombre completo del empleado">
+                    <input type="text" class="form-control form-control-sm" name="inputName" value="<?= $data["nombre"] ?>" placeholder="Nombre completo del empleado">
                 </div>
             </div>
 
             <div class="mb-3 row">
                 <label for="inputEmail" class="col-sm-2 col-form-label">Correo electrónico *</label>
                 <div class="col-sm-10">
-                    <input type="email" class="form-control form-control-sm" name="email" placeholder="Correo electrónico">
+                    <input type="email" class="form-control form-control-sm" name="email" value="<?= $data["email"] ?>" placeholder="Correo electrónico">
                 </div>
             </div>
 
+            <?php   if( $data["sexo"] == "M" ){
+                        $checkedM = "checked";
+                    } else if ( $data["sexo"] == "F" ) {
+                        $checkedF = "checked";
+                    } 
+            ?>
             <div class="mb-3 row">
                 <label for="inputEmail" class="col-sm-2 col-form-label">Sexo *</label>
                 <div class="col-sm-10">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="sexo" name="radiosSex1" value="M">
+                        <input class="form-check-input" type="radio" name="sexo" name="radiosSex1" value="M" <?= $checkedM ?>>
                         <label class="form-check-label" for="radiosSex1">
                             Masculino
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="sexo" name="radiosSex2" value="F">
+                        <input class="form-check-input" type="radio" name="sexo" name="radiosSex2" value="F" <?= $checkedF ?> >
                         <label class="form-check-label" for="radiosSex2">
                             Femenino
                         </label>
@@ -52,8 +58,7 @@
                     <select class="form-select form-select-sm" name="area_id" aria-label=".form-select-sm example">
                         <option selected>Open this select menu</option>
                         <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        
                     </select>
                 </div>
             </div>

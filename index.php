@@ -4,33 +4,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Prueba técnica Nexura</title>
 </head>
 <body>
-<?php
-	$mod 	 = $_REQUEST['modulo'];
-	$funcion  = $_REQUEST['f'];
-	
-	// $mod  = 'usuarios';
-	// $funcion = 'listar';
+	<?php
+		$modulo 	 = $_REQUEST['modulo'];
+		$componente  = $_REQUEST['componente'];
 
-
-	if (file_exists("controller/".$mod."Controller.php")){
-		include "controller/".$mod."Controller.php";
-		$obj = new $mod();
-		if (method_exists($obj, $funcion)) {
-			$obj->$funcion();
+		if (file_exists("controller/".$modulo."Controller.php")){
+			include "controller/".$modulo."Controller.php";
+			$obj = new $modulo();
+			if (method_exists($obj, $componente)) {
+				$obj->$componente();
+			}else{
+				echo "El metodo donde intenta acceder no existe";
+			}
 		}else{
-			echo "El metodo donde intenta acceder no existe";
+			header('Location: ?modulo=employe&componente=main');
 		}
-	}else{
-		echo "No existe el archivo";
-	}
-	
-?>
-<a href="?modulo=employe&f=create"><button class="btn btn-success">Nuevo usuario</button></a>
-
-       
-
+		
+	?>     
 </body>
 </html>
